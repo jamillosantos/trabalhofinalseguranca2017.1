@@ -1,10 +1,8 @@
 package br.edu.ifrn.tads.seguranca.model;
 
-import br.edu.ifrn.tads.seguranca.utils.Hash;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
