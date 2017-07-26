@@ -5,31 +5,46 @@ import javax.persistence.*;
 import br.edu.ifrn.tads.seguranca.utils.Hash;
 import lombok.*;
 
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.UUID;
 
+import static com.sun.xml.internal.messaging.saaj.util.Base64.base64Decode;
+
 @Entity
 @Table(name = "users")
-@Getter
 @ToString
 @NoArgsConstructor
 public class User
 {
 	@Id
+	@Getter
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
 	@Setter
+	@Getter
 	private String name;
 
 	@Setter
+	@Getter
 	private String email;
 
+	@Getter
 	private String password;
 
+	@Getter
 	private String salt;
 
+	private String publicKey;
+
+	@Getter
 	@Singular
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<Group> groups = new ArrayList<>();
@@ -63,5 +78,28 @@ public class User
 	{
 		this.salt = this.generateSalt();
 		this.password = this.generatePassword(value);
+	}
+
+	public void setPublicKey(PublicKey value) throws NoSuchAlgorithmException, InvalidKeySpecException
+	{
+		KeyFactory fact = KeyFactory.getInstance("RSA");
+		X509EncodedKeySpec spec = fact.getKeySpec(value,
+			X509EncodedKeySpec.class);
+		this.publicKey = Base64.getEncoder().encodeToString(spec.getEncoded());
+	}
+
+	public PublicKey getPublicKey()
+	{
+		try
+		{
+			byte[] data = Base64.getDecoder().decode(this.publicKey);
+			X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
+			KeyFactory fact = KeyFactory.getInstance("RSA");
+			return fact.generatePublic(spec);
+		}
+		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
+		{
+			return null;
+		}
 	}
 }
