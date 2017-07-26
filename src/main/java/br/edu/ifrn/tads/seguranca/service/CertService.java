@@ -102,21 +102,24 @@ public class CertService
 		}
 	}
 
-	public boolean privateKeyToStream(PrivateKey key, OutputStream stream)
+	public int privateKeyToStream(PrivateKey key, OutputStream stream)
 	{
 		try
 		{
 			KeyFactory fact = KeyFactory.getInstance("RSA");
 			PKCS8EncodedKeySpec spec = fact.getKeySpec(key,
 				PKCS8EncodedKeySpec.class);
-			stream.write("-----BEGIN PRIVATE KEY-----\n".getBytes());
-			stream.write(Base64.getEncoder().encode(spec.getEncoded()));
-			stream.write("\n-----END PRIVATE KEY-----".getBytes());
-			return true;
+			byte[] headerBytes = "-----BEGIN PRIVATE KEY-----\n".getBytes();
+			byte[] bytes = Base64.getEncoder().encode(spec.getEncoded());
+			byte[] footerBytes = "\n-----END PRIVATE KEY-----".getBytes();
+			stream.write(headerBytes);
+			stream.write(bytes);
+			stream.write(footerBytes);
+			return headerBytes.length + bytes.length + footerBytes.length;
 		}
 		catch (InvalidKeySpecException | IOException | NoSuchAlgorithmException e)
 		{
-			return false;
+			return 0;
 		}
 	}
 

@@ -57,6 +57,17 @@ public class CertServiceTest extends AbstractTestNGSpringContextTests
 	}
 
 	@Test
+	public void testHasPublicKey() throws Exception
+	{
+		User user = new User("GI Joe", "john@doe.com", "12345");
+		this._userService.save(user);
+		assertFalse(user.getHasPublicKey());
+		PrivateKey privateKey = this._service.generate(user);
+		PublicKey publicKey = user.getPublicKey();
+		assertTrue(user.getHasPublicKey());
+	}
+
+	@Test
 	public void testCheckSignatureFail()
 	{
 		PublicKey publicKey = this._service.publicKeyFromStream(this.getClass().getClassLoader().getResourceAsStream("public.key"));

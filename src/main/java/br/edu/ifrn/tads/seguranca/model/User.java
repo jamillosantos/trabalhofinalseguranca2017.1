@@ -3,6 +3,7 @@ package br.edu.ifrn.tads.seguranca.model;
 import javax.persistence.*;
 
 import br.edu.ifrn.tads.seguranca.utils.Hash;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.*;
 
 import java.security.KeyFactory;
@@ -15,11 +16,9 @@ import java.util.Base64;
 import java.util.Collection;
 import java.util.UUID;
 
-import static com.sun.xml.internal.messaging.saaj.util.Base64.base64Decode;
-
 @Entity
 @Table(name = "users")
-@ToString
+@ToString(of = {"id", "name", "email"})
 @NoArgsConstructor
 public class User
 {
@@ -101,5 +100,15 @@ public class User
 		{
 			return null;
 		}
+	}
+
+	public boolean getHasPublicKey()
+	{
+		return (this.publicKey != null) && (!this.publicKey.isEmpty());
+	}
+
+	public String getPublicKeyString()
+	{
+		return this.publicKey;
 	}
 }
