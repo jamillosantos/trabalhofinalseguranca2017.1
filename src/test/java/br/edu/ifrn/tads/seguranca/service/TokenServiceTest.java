@@ -31,7 +31,7 @@ public class TokenServiceTest extends AbstractTestNGSpringContextTests
 	{
 		long count = this._service.count();
 
-		User user = new User("GI Joe", "john@doe.com", "12345");
+		User user = new User("GI Joe", "john@doe.com", "fileToHash");
 		this._userService.save(user);
 		this._service.save(new Token(user, "127.0.0.1", null, "Netscape 1.0"));
 		assertEquals(this._service.count(), count + 1);
@@ -41,7 +41,7 @@ public class TokenServiceTest extends AbstractTestNGSpringContextTests
 	public void testRemoval() throws Exception
 	{
 		long count = this._service.count();
-		User user = new User("GI Joe", "john@doe.com", "12345");
+		User user = new User("GI Joe", "john@doe.com", "fileToHash");
 		this._userService.save(user);
 		Token token = new Token(user, "127.0.0.1", null, "Netscape 1.0");
 		this._service.save(token);
@@ -54,7 +54,7 @@ public class TokenServiceTest extends AbstractTestNGSpringContextTests
 	public void testCount() throws Exception
 	{
 		long count = this._service.count();
-		User user = new User("GI Joe", "john@doe.com", "12345");
+		User user = new User("GI Joe", "john@doe.com", "fileToHash");
 		this._userService.save(user);
 		this._service.save(new Token(user, "127.0.0.1", null, "Netscape 1.0"));
 		this._service.save(new Token(user, "127.0.0.1", null, "Netscape 1.0"));
@@ -66,7 +66,7 @@ public class TokenServiceTest extends AbstractTestNGSpringContextTests
 	public void testFindAll() throws Exception
 	{
 		long count = this._service.count();
-		User user = new User("GI Joe", "john@doe.com", "12345");
+		User user = new User("GI Joe", "john@doe.com", "fileToHash");
 		this._userService.save(user);
 		this._service.save(new Token(user, "127.0.0.1", null, "Netscape 1.0"));
 		this._service.save(new Token(user, "127.0.0.1", null, "Netscape 1.0"));
@@ -80,7 +80,7 @@ public class TokenServiceTest extends AbstractTestNGSpringContextTests
 	public void testFindByUserAndToken() throws Exception
 	{
 		long count = this._service.count();
-		User user = new User("GI Joe", "john@doe.com", "12345");
+		User user = new User("GI Joe", "john@doe.com", "fileToHash");
 		this._userService.save(user);
 		Token token = new Token(user, "127.0.0.1", null, "Netscape 1.0");
 		String t = token.getToken();

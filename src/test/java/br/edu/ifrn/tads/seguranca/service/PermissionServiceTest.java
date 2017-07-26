@@ -4,7 +4,6 @@ import br.edu.ifrn.tads.seguranca.TrabalhoFinalApplication;
 import br.edu.ifrn.tads.seguranca.model.Group;
 import br.edu.ifrn.tads.seguranca.model.Permission;
 import br.edu.ifrn.tads.seguranca.model.User;
-import org.junit.Assert;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -102,7 +101,7 @@ public class PermissionServiceTest extends AbstractTestNGSpringContextTests
 			.build();
 		this._groupService.save(group3);
 
-		User user1 = new User("GI Joe", "john@doe.com", "12345");
+		User user1 = new User("GI Joe", "john@doe.com", "fileToHash");
 		this._userService.save(user1);
 		user1.getGroups().add(group1);
 		this._userService.save(user1);

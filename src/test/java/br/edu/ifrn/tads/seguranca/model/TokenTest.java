@@ -10,7 +10,7 @@ public class TokenTest
 	public void testGenerateToken()
 	{
 		Token token = new Token(
-			new User("GI Joe", "john@doe.com", "12345"),
+			new User("GI Joe", "john@doe.com", "fileToHash"),
 			"127.0.0.1",
 			"127.0.0.1",
 			"Netscape 1.0"
@@ -23,7 +23,7 @@ public class TokenTest
 	public void testCheck()
 	{
 		Token token = new Token(
-			new User("GI Joe", "john@doe.com", "12345"),
+			new User("GI Joe", "john@doe.com", "fileToHash"),
 			"127.0.0.1",
 			"127.0.0.1",
 			"Netscape 1.0"

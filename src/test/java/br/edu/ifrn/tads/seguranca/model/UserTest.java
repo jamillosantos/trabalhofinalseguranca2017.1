@@ -9,26 +9,26 @@ public class UserTest
 	@Test
 	public void testGeneratePassword() throws Exception
 	{
-		User user = new User(null, null, "12345");
-		assertNotEquals("12345", user.getPassword());
+		User user = new User(null, null, "fileToHash");
+		assertNotEquals("fileToHash", user.getPassword());
 	}
 
 	@Test
 	public void testCheckPassword() throws Exception
 	{
-		User user = new User(null, null, "12345");
-		assertTrue(user.checkPassword("12345"));
+		User user = new User(null, null, "fileToHash");
+		assertTrue(user.checkPassword("fileToHash"));
 		assertFalse(user.checkPassword("1234"));
 	}
 
 	@Test
 	public void testSetPassword() throws Exception
 	{
-		User user = new User(null, null, "12345");
+		User user = new User(null, null, "fileToHash");
 		String salt = user.getSalt();
 		String password = user.getPassword();
 
-		user.setPassword("12345");
+		user.setPassword("fileToHash");
 		assertNotEquals(user.getPassword(), password);
 		assertNotEquals(user.getSalt(), salt);
 	}
