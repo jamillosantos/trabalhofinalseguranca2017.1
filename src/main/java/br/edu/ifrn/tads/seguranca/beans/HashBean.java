@@ -13,7 +13,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 
 @Named
@@ -52,6 +55,28 @@ public class HashBean
 			}
 		}
 		catch (IOException | NoSuchAlgorithmException e)
+		{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Deu uma treta no processo. Mensagem: " + e.getMessage()));
+		}
+	}
+
+	@Getter
+	@Setter
+	private String text;
+
+	@Getter
+	@Setter
+	private String textCalculatedHash;
+
+	public void generateFromText()
+	{
+		InputStream stream = new ByteArrayInputStream(this.text.getBytes());
+		try
+		{
+			this.textCalculatedHash = this._service.hashStream(stream);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Hash do texto gerado."));
+		}
+		catch(Exception e)
 		{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Deu uma treta no processo. Mensagem: " + e.getMessage()));
 		}

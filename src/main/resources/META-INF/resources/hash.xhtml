@@ -19,25 +19,48 @@
     <h1>Geração/Verificação de Hash</h1>
     <p:panel>
         <h:form enctype="multipart/form-data">
-            <div>
-                <h:outputLabel>
-                    Hash (SHA1):
-                    <p:inputText value="#{hashBean.hashCode}"/>
-                </h:outputLabel>
-            </div>
-            <p:panel rendered="#{(hashBean.calculatedHash != null) and (!empty hashBean.calculatedHash)}">
-                <h:outputLabel>
-                    Gerado (SHA1):
-                    <h:outputText value="#{hashBean.calculatedHash}"/>
-                </h:outputLabel>
-            </p:panel>
-            <div>
-                <h:outputLabel>
-                    Arquivo:
-                    <h:inputFile id="file" value="#{hashBean.file}"/>
-                </h:outputLabel>
-            </div>
-            <p:commandButton value="Verificar" actionListener="#{hashBean.verify}" ajax="false"/>
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <h3>Arquivo</h3>
+                        <div>
+                            <div><h:outputLabel>Hash (MD5):</h:outputLabel></div>
+                            <p:inputText value="#{hashBean.hashCode}"/> (Opcional)
+                            <div><em>* Preencha este campo apenas para efetuar a verificação.</em></div>
+                        </div>
+                        <p:panel rendered="#{(hashBean.calculatedHash != null) and (!empty hashBean.calculatedHash)}">
+                            <br />
+                            <div><h:outputLabel>Gerado (MD5):</h:outputLabel></div>
+                            <h:outputText value="#{hashBean.calculatedHash}"/>
+                        </p:panel>
+                        <br />
+                        <div>
+                            <h:outputLabel>
+                                Arquivo:
+                                <h:inputFile id="file" value="#{hashBean.file}"/>
+                            </h:outputLabel>
+                        </div>
+                        <br />
+                        <p:commandButton value="Verificar" actionListener="#{hashBean.verify}" ajax="false"/>
+                    </p:column>
+                    <p:column>
+                        <h3>Texto</h3>
+                        <div>
+                            <div><h:outputLabel>Texto (MD5):</h:outputLabel></div>
+                            <p:inputText value="#{hashBean.text}"/>
+                        </div>
+                        <br />
+                        <p:panel rendered="#{(hashBean.textCalculatedHash != null) and (!empty hashBean.textCalculatedHash)}">
+                            <h:outputLabel>
+                                Hash (MD5):
+                                <h:outputText value="#{hashBean.textCalculatedHash}"/>
+                            </h:outputLabel>
+                        </p:panel>
+                        <br />
+                        <p:commandButton value="Gerar hash" actionListener="#{hashBean.generateFromText}" ajax="false"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </h:form>
     </p:panel>
 </h:body>

@@ -15,8 +15,7 @@ public class FileService
 
 	public String hashStream(InputStream stream) throws IOException, NoSuchAlgorithmException
 	{
-		// MessageDigest md = MessageDigest.getInstance("SHA-512");
-		MessageDigest md = MessageDigest.getInstance("SHA-1");
+		MessageDigest md = MessageDigest.getInstance("MD5");
 
 		byte[] buff = new byte[1024 * 10];
 		int len;

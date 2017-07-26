@@ -36,26 +36,21 @@
     <p:panel header="Novo usuário">
         <h:form>
             <div>
-                <h:outputLabel>
-                    Nome:
-                    <p:inputText value="#{userBean.newUser.name}" />
-                </h:outputLabel>
-            </div>
+                <div><h:outputLabel>Nome:</h:outputLabel></div>
+                <p:inputText value="#{userBean.newUser.name}" />
+            </div><br/>
             <div>
-                <h:outputLabel>
-                    E-mail:
-                    <p:inputText value="#{userBean.newUser.email}" />
-                </h:outputLabel>
-            </div>
+                <div><h:outputLabel>E-mail:</h:outputLabel></div>
+                <p:inputText value="#{userBean.newUser.email}" />
+            </div><br/>
             <div>
-                <h:outputLabel>
-                    Password:
-                    <p:inputText type="password" value="#{userBean.newUserPassword}" />
-                </h:outputLabel>
-            </div>
+                <div><h:outputLabel>Senha:</h:outputLabel></div>
+                <p:inputText type="password" value="#{userBean.newUserPassword}" />
+            </div><br />
             <p:commandButton value="Criar novo" actionListener="#{userBean.saveNewUser}" ajax="false" />
         </h:form>
     </p:panel>
+    <hr />
     <p:panel>
         <h1>Instruções</h1>
         <h2>Geração de chave privada</h2>
