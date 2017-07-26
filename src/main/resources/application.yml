@@ -17,7 +17,7 @@ spring:
     show-sql: true
     hibernate:
       dialect: org.hibernate.dialect.HSQLDialect
-      ddl-auto: update
+      ddl-auto: create
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
     properties:
       hibernate:
