@@ -5,6 +5,8 @@ import javax.persistence.*;
 import br.edu.ifrn.tads.seguranca.utils.Hash;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +29,10 @@ public class User
 	private String password;
 
 	private String salt;
+
+	@Singular
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Collection<Group> groups = new ArrayList<>();
 
 	public User(String name, String email, String password)
 	{
