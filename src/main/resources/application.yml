@@ -1,8 +1,10 @@
+
 server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:hsqldb:file:/home/jsantos/testdb
+    url: jdbc:hsqldb:mem:testdb
+    # url: jdbc:hsqldb:file:testdb
     username: sa
     # Number of ms to wait before throwing an exception if no connection is available.
     max-wait: 1000
