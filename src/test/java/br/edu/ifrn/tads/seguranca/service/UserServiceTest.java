@@ -67,10 +67,10 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests
 	public void testFindByEmailAndPassword() throws Exception
 	{
 		this._service.save(
-			new User("GI Joe", "john@doe.com", "cobra")
+			new User("GI Joe", "john@doe.com", "12345")
 		);
 
-		User user = this._service.findByEmailAndPassword("john@doe.com", "cobra");
+		User user = this._service.findByEmailAndPassword("john@doe.com", "12345");
 		Assert.assertNotNull(user);
 	}
 
@@ -78,10 +78,10 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests
 	public void testFindByEmailAndPasswordShouldFail() throws Exception
 	{
 		this._service.save(
-			new User("GI Joe", "john@doe.com", "cobra")
+			new User("GI Joe", "john@doe.com", "12345")
 		);
 
-		User user = this._service.findByEmailAndPassword("john@doe.com", "cobra2");
+		User user = this._service.findByEmailAndPassword("john@doe.com", "cobra");
 		Assert.assertNull(user);
 	}
 }
