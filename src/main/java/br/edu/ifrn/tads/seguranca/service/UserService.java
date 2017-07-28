@@ -17,6 +17,10 @@ public class UserService extends Service<User, Long>
 
 	public User findByEmailAndPassword(String email, String password)
 	{
-		return ((UserRepository) this.getRepository()).findByEmailAndPassword(email, password);
+		User user = ((UserRepository) this.getRepository()).findByEmail(email);
+		if ((user != null) && (user.checkPassword(password)))
+			return user;
+		else
+			return null;
 	}
 }

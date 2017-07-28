@@ -84,4 +84,11 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests
 		User user = this._service.findByEmailAndPassword("john@doe.com", "cobra");
 		Assert.assertNull(user);
 	}
+
+	@Test
+	public void testFindByEmailAndPasswordUserNotFound() throws Exception
+	{
+		User user = this._service.findByEmailAndPassword("jose@doe.com", "cobra");
+		Assert.assertNull(user);
+	}
 }
