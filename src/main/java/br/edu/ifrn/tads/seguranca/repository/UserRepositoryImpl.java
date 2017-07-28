@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements CustomUserRepository
 			.select(QUser.user)
 			.where(QUser.user.email.eq(email))
 			.fetchFirst();
-		if (user.checkPassword(password))
+		if ((user != null) && (user.checkPassword(password)))
 			return user;
 		else
 			return null;

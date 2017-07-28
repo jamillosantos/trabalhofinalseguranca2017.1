@@ -27,6 +27,8 @@ public class UserBean
 	@Getter
 	@Setter
 	private String newUserPassword;
+	
+
 
 	public void saveNewUser()
 	{
@@ -69,6 +71,8 @@ public class UserBean
 	{
 		return this._service.findOne(id);
 	}
+	
+	
 
 	public void privateKeyToResponse(PrivateKey privateKey, HttpServletResponse response)
 	{

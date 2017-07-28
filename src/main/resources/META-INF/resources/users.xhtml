@@ -25,6 +25,9 @@
             <p:column headerText="E-mail">
                 <h:outputText value="#{user.email}" />
             </p:column>
+            <p:column headerText="Permissão">
+                <h:outputText value="#{user.permissao}" />
+            </p:column>
             <p:column headerText="Ações">
                 <p:link rendered="#{not user.hasPublicKey}" href="generate-keys/#{user.id}" title="Gerar chave" style="opacity: 0.3"><i class="fa fa-key"></i></p:link>
                 <p:link rendered="#{user.hasPublicKey}" href="signature.xhtml?id=#{user.id}" title="Verificar arquivo assinado"><i class="fa fa-key"></i> <small>Verificar arquivo assinado</small></p:link>
@@ -47,6 +50,11 @@
                 <div><h:outputLabel>Senha:</h:outputLabel></div>
                 <p:inputText type="password" value="#{userBean.newUserPassword}" />
             </div><br />
+            <h:selectOneRadio value="#{userBean.newUser.permissao}">
+			   	<f:selectItem itemValue="Usuario" itemLabel="Usuario" />
+			   	<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+			</h:selectOneRadio>
+            
             <p:commandButton value="Criar novo" actionListener="#{userBean.saveNewUser}" ajax="false" />
         </h:form>
     </p:panel>
