@@ -34,7 +34,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests
 	public void testInsertion() throws Exception
 	{
 		long count = this._service.count();
-		User user = new User("GI Joe", "john@doe.com", "cobra");
+		User user = new User("GI Joe", "john@doe.com", "12345");
 		user.getGroups().add(Group.builder().name("Group 1").build());
 		this._service.save(user);
 		assertEquals(this._service.count(), count + 1);
@@ -45,7 +45,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests
 	public void testRemoval() throws Exception
 	{
 		long count = this._service.count();
-		User user = new User("GI Joe", "john@doe.com", "cobra");
+		User user = new User("GI Joe", "john@doe.com", "12345");
 		this._service.save(user);
 		this._service.delete(user);
 		assertEquals(this._service.count(), count);
