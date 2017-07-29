@@ -3,7 +3,6 @@ package br.edu.ifrn.tads.seguranca.model;
 import javax.persistence.*;
 
 import br.edu.ifrn.tads.seguranca.utils.Hash;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.*;
 
 import java.security.KeyFactory;
@@ -18,7 +17,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-@ToString(of = { "id", "name", "email","permissao" })
+@ToString(of = { "id", "name", "email","permission" })
 @NoArgsConstructor
 public class User {
 	@Id
@@ -39,7 +38,7 @@ public class User {
 	
 	@Setter
 	@Getter
-	private String permissao;
+	private String permission;
 
 	@Getter
 	private String salt;
@@ -54,7 +53,7 @@ public class User {
 	public User(String name, String email, String password) {
 		this.name = name;
 		this.email = email;
-		this.permissao = permissao;
+		this.permission = permission;
 		this.generateSalt();
 		this.setPassword(password);
 		

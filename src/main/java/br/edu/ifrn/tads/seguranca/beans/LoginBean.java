@@ -13,7 +13,8 @@ import lombok.Setter;
 
 @Named
 @ViewScoped
-public class LoginBean {
+public class LoginBean
+{
 
 	@Getter
 	@Setter
@@ -26,29 +27,34 @@ public class LoginBean {
 	@Inject
 	private UserService _service;
 
-	public String logar() {
-
-		try {
+	public String logar()
+	{
+		try
+		{
 			System.out.println("email = " + email + "senha " + password);
 			User user = null;
 			user = this._service.findByEmailAndPassword(this.email, this.password);
-			if (user != null) {
+			if (user != null)
+			{
 				UsuarioLogadoBean.setUserLogado(user);
 				return "users?faces-redirect=true";
-			} else {
+			}
+			else
+			{
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Email ou senha incorreto"));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Email ou senha incorreto"));
 				System.out.println("usuario null ================================== ");
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Ocorreu um erro"));
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Ocorreu um erro"));
 		}
 
 		return "";
 
 	}
-	
-	
+
 
 }
