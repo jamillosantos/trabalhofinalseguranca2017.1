@@ -14,58 +14,63 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </h:head>
 <h:body>
-    <a href="hash.xhtml">Hash em arquivos</a>
-    <hr />
-    <h:form>
-        <p:dataTable value="#{userBean.list}" var="user" emptyMessage="Nenhum usuário cadastrado" rendered="#{userLogadoBean.hasUserLogado}" type="definition">
-            <p:column headerText="Nome">
-                <h:outputText value="#{user.name}" />
-                <h:panelGroup layout="block" rendered="#{not user.hasPublicKey}">
-                    <span style="color: red">A chave ainda não foi gerada.</span> <a href="generate-keys/#{user.id}" title="Gerar chave">Gerar chave</a>
-                </h:panelGroup>
-            </p:column>
-            <p:column headerText="E-mail">
-                <h:outputText value="#{user.email}" />
-            </p:column>
-            <p:column headerText="Permissão">
-                <h:outputText value="#{user.permission}" />
-            </p:column>
-            <p:column headerText="Ações">
-                <p:link rendered="#{not user.hasPublicKey}" href="generate-keys/#{user.id}" title="Gerar chave" style="opacity: 0.3"><i class="fa fa-key"></i></p:link>
-                <p:link rendered="#{user.hasPublicKey}" href="signature.xhtml?id=#{user.id}" title="Verificar arquivo assinado"><i class="fa fa-key"></i> <small>Verificar arquivo assinado</small></p:link>
-                &nbsp;&nbsp; <p:commandLink actionListener="#{userBean.delete(user)}" ajax="false"><i class="fa fa-trash"></i></p:commandLink>
-            </p:column>
-        </p:dataTable>
-    </h:form>
-
-    <p:panel header="Novo usuário">
-        <h:form>
-            <div>
-                <div><h:outputLabel>Nome:</h:outputLabel></div>
-                <p:inputText value="#{userBean.newUser.name}" />
-            </div><br/>
-            <div>
-                <div><h:outputLabel>E-mail:</h:outputLabel></div>
-                <p:inputText value="#{userBean.newUser.email}" />
-            </div><br/>
-            <div>
-                <div><h:outputLabel>Senha:</h:outputLabel></div>
-                <p:inputText type="password" value="#{userBean.newUserPassword}" />
-            </div><br />
-            <h:selectOneRadio value="#{userBean.newUser.permission}">
-			   	<f:selectItem itemValue="Usuario" itemLabel="Usuario" />
-			   	<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
-			</h:selectOneRadio>
-            
-            <p:commandButton value="Criar novo" actionListener="#{userBean.saveNewUser}" ajax="false" />
-        </h:form>
-    </p:panel>
-    <hr />
-    <p:panel>
-        <h1>Instruções</h1>
-        <h2>Geração de chave privada</h2>
-        <p>Ao clicar cadastrar o usuário, ele não possui um par de chaves relacionado. Clique em "gerar chave" para gerar a chave pública (ela é guardada dentro do banco de dados). O sistema iniciará o download automaticamente da chave privada.</p>
-        <p><strong>IMPORTANTE!</strong> Mantenha esse arquivo seguro! Nem mesmo o servidor tem o backup.</p>
+<p:panel rendered="#{usuarioLogadoBean.hasUserLogado}">
+	    <a href="hash.xhtml">Hash em arquivos</a>
+	    <h:form>
+	   		<h:commandLink value="Sair" action="#{loginBean.logout}"/>
+	    </h:form>
+	    <hr />
+	    <h:form>
+	        <p:dataTable value="#{userBean.list}" var="user" emptyMessage="Nenhum usuário cadastrado" rendered="#{usuarioLogadoBean.userIsAdministrador}" type="definition">
+	            <p:column headerText="Nome">
+	                <h:outputText value="#{user.name}" />
+	                <h:panelGroup layout="block" rendered="#{not user.hasPublicKey}">
+	                    <span style="color: red">A chave ainda não foi gerada.</span> <a href="generate-keys/#{user.id}" title="Gerar chave">Gerar chave</a>
+	                </h:panelGroup>
+	            </p:column>
+	            <p:column headerText="E-mail">
+	                <h:outputText value="#{user.email}" />
+	            </p:column>
+	            <p:column headerText="Permissão">
+	                <h:outputText value="#{user.permission}" />
+	            </p:column>
+	            <p:column headerText="Ações">
+	                <p:link rendered="#{not user.hasPublicKey}" href="generate-keys/#{user.id}" title="Gerar chave" style="opacity: 0.3"><i class="fa fa-key"></i></p:link>
+	                <p:link rendered="#{user.hasPublicKey}" href="signature.xhtml?id=#{user.id}" title="Verificar arquivo assinado"><i class="fa fa-key"></i> <small>Verificar arquivo assinado</small></p:link>
+	                &nbsp;&nbsp; <p:commandLink actionListener="#{userBean.delete(user)}" ajax="false"><i class="fa fa-trash"></i></p:commandLink>
+	            </p:column>
+	        </p:dataTable>
+	    </h:form>
+	
+	    <p:panel header="Novo usuário">
+	        <h:form>
+	            <div>
+	                <div><h:outputLabel>Nome:</h:outputLabel></div>
+	                <p:inputText value="#{userBean.newUser.name}" />
+	            </div><br/>
+	            <div>
+	                <div><h:outputLabel>E-mail:</h:outputLabel></div>
+	                <p:inputText value="#{userBean.newUser.email}" />
+	            </div><br/>
+	            <div>
+	                <div><h:outputLabel>Senha:</h:outputLabel></div>
+	                <p:inputText type="password" value="#{userBean.newUserPassword}" />
+	            </div><br />
+	            <h:selectOneRadio value="#{userBean.newUser.permission}">
+				   	<f:selectItem itemValue="Usuario" itemLabel="Usuario" />
+				   	<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+				</h:selectOneRadio>
+	            
+	            <p:commandButton value="Criar novo" actionListener="#{userBean.saveNewUser}" ajax="false" />
+	        </h:form>
+	    </p:panel>
+	    <hr />
+	    <p:panel>
+	        <h1>Instruções</h1>
+	        <h2>Geração de chave privada</h2>
+	        <p>Ao clicar cadastrar o usuário, ele não possui um par de chaves relacionado. Clique em "gerar chave" para gerar a chave pública (ela é guardada dentro do banco de dados). O sistema iniciará o download automaticamente da chave privada.</p>
+	        <p><strong>IMPORTANTE!</strong> Mantenha esse arquivo seguro! Nem mesmo o servidor tem o backup.</p>
+	    </p:panel>
     </p:panel>
 </h:body>
 </html>

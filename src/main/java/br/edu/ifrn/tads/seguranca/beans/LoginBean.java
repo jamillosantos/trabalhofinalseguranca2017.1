@@ -37,6 +37,7 @@ public class LoginBean
 			if (user != null)
 			{
 				UsuarioLogadoBean.setUserLogado(user);
+//				UsuarioLogadoBean.setHasUserLogado(true);
 				return "users?faces-redirect=true";
 			}
 			else
@@ -54,6 +55,11 @@ public class LoginBean
 
 		return "";
 
+	}
+	
+	public String logout(){
+		UsuarioLogadoBean.setUserLogado(null);
+		return "login?faces-redirect=true";
 	}
 
 
