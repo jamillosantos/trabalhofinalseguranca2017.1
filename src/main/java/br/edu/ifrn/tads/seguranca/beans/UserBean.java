@@ -43,6 +43,7 @@ public class UserBean
 	{
 		try
 		{
+			this.newUser.setPassword(this.newUserPassword);
 			this._service.save(this.newUser);
 
 			this.newUser = new User();
