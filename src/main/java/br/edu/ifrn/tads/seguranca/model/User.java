@@ -57,6 +57,8 @@ public class User {
 		this.permissao = permissao;
 		this.generateSalt();
 		this.setPassword(password);
+		
+		
 	}
 
 	private String generateSalt() {
@@ -93,6 +95,10 @@ public class User {
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			return null;
 		}
+	}
+	
+	public void mostrarSenha(){
+		System.out.println(this.password +" ------------------------------- ");
 	}
 
 	public boolean getHasPublicKey() {

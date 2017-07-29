@@ -1,6 +1,8 @@
 package br.edu.ifrn.tads.seguranca.beans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -24,17 +26,29 @@ public class LoginBean {
 	@Inject
 	private UserService _service;
 
-	public void logar() {
+	public String logar() {
 
-	System.out.println("email = " + email + "senha " + password);
-		User user = null;
-		user = this._service.findByEmailAndPassword(this.email,this.password);
-		if(user != null){
-			System.out.println("usuario ok   ================================== ");
-		}else{
-			System.out.println("usuario null ================================== ");
+		try {
+			System.out.println("email = " + email + "senha " + password);
+			User user = null;
+			user = this._service.findByEmailAndPassword(this.email, this.password);
+			if (user != null) {
+				UsuarioLogadoBean.setUserLogado(user);
+				return "users?faces-redirect=true";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Email ou senha incorreto"));
+				System.out.println("usuario null ================================== ");
+			}
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Ocorreu um erro"));
 		}
 
+		return "";
+
 	}
+	
+	
 
 }
