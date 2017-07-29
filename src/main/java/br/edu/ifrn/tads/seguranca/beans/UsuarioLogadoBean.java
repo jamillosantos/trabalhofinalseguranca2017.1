@@ -10,5 +10,10 @@ import lombok.Setter;
 public class UsuarioLogadoBean {
 	@Getter
 	@Setter
-	private static User userLogado;
+	private static User userLogado = null;
+	
+	
+	public boolean hasUserLogado(){
+		return UsuarioLogadoBean.getUserLogado() == null;
+	}
 }

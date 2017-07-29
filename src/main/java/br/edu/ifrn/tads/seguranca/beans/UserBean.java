@@ -28,6 +28,15 @@ public class UserBean
 	@Setter
 	private String newUserPassword;
 	
+	public  UserBean(){
+		this.verificar();
+	}
+	public String verificar(){
+		if(UsuarioLogadoBean.getUserLogado() == null){
+			return "Login?faces-redirect=true";
+		}
+		return "";
+	}
 
 
 	public void saveNewUser()

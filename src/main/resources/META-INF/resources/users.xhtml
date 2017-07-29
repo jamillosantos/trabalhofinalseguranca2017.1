@@ -17,7 +17,7 @@
     <a href="hash.xhtml">Hash em arquivos</a>
     <hr />
     <h:form>
-        <p:dataTable value="#{userBean.list}" var="user" emptyMessage="Nenhum usuário cadastrado" type="definition">
+        <p:dataTable value="#{userBean.list}" var="user" emptyMessage="Nenhum usuário cadastrado" rendered="#{userLogadoBean.hasUserLogado}" type="definition">
             <p:column headerText="Nome">
                 <h:outputText value="#{user.name}" />
                 <h:panelGroup layout="block" rendered="#{not user.hasPublicKey}">
