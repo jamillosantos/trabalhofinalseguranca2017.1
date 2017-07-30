@@ -14,7 +14,14 @@
 </h:head>
 <h:body>
 	<p:panel rendered="#{usuarioLogadoBean.hasUserLogado}">
-		<a href="users.xhtml">Usuários</a>
+		
+		  <h:form>
+	   		
+  		   <p:menubar>
+  		   		<p:menuitem value="Usuários" style="margin-right:10px"  url="users.xhtml" icon="ui-icon-person" />	
+        		<p:menuitem value="Sair" action="#{loginBean.logout}" icon="ui-icon-close" />      
+   		 </p:menubar>	   		
+	    </h:form>
 		<hr />
 		<p:tooltip />
 		<p:messages id="messages" showDetail="true" autoUpdate="true"

@@ -15,10 +15,15 @@
 </h:head>
 <h:body>
 <p:panel rendered="#{usuarioLogadoBean.hasUserLogado}">
-	    <a href="hash.xhtml">Hash em arquivos</a>
+	   
 	    <h:form>
-	   		<h:commandLink value="Sair" action="#{loginBean.logout}"/>
+	   		
+  		   <p:menubar>
+  		   		<p:menuitem value="Hash em arquivos"  style="margin-right:10px"  url="hash.xhtml" icon="ui-icon-document" />	
+        		<p:menuitem value="Sair" action="#{loginBean.logout}" icon="ui-icon-close" />      
+   		 </p:menubar>	   		
 	    </h:form>
+	    
 	    <hr />
 	    <h:form>
 	        <p:dataTable value="#{userBean.list}" var="user" emptyMessage="Nenhum usuário cadastrado" rendered="#{usuarioLogadoBean.userIsAdministrador}" type="definition">
@@ -57,7 +62,7 @@
 	                <p:inputText type="password" value="#{userBean.newUserPassword}" />
 	            </div><br />
 	            <h:selectOneRadio value="#{userBean.newUser.permission}">
-				   	<f:selectItem itemValue="Usuario" itemLabel="Usuario" />
+				   	<f:selectItem itemValue="Usuario" itemLabel="Usuário" />
 				   	<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
 				</h:selectOneRadio>
 	            
